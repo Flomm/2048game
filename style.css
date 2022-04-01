@@ -1,5 +1,67 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root {
+  --bg-color: rgb(214, 214, 214);
+  --board-color: rgb(112, 112, 112);
+  --tile-color: rgb(22, 15, 15);
+
+  --tile-size: 20vmin;
+  --tile-qty: 4;
+  --radius-size: 1vmin;
+  --gap-size: 2vmin;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  background-color: var(--bg-color);
+  font-size: 7.5vmin;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-board {
+  background-color: var(--board-color);
+  display: grid;
+  grid-template-columns: repeat(var(--tile-qty), var(--tile-size));
+  grid-template-rows: repeat(var(--tile-qty), var(--tile-size));
+  gap: var(--gap-size);
+  border-radius: var(--radius-size);
+  padding: var(--gap-size);
+  position: relative;
+}
+
+.placeholder {
+  background-color: var(--bg-color);
+  border-radius: 1vmin;
+}
+
+.tile {
+  --x: 2;
+  --y: 2;
+  --background-lightness: 20%;
+  --text-lightness: 80%;
+  background-color: hsl(200, 50%, var(--background-lightness));
+  color: hsl(200, 25%, var(--text-lightness));
+  position: absolute;
+  border-radius: var(--radius-size);
+  height: var(--tile-size);
+  width: var(--tile-size);
+  color: var(--bg-color);
+  top: calc(var(--y) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
+  left: calc(var(--y) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
+  font-weight: bold;
 }
