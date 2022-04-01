@@ -50,8 +50,8 @@ body {
 }
 
 .tile {
-  --x: 0;
-  --y: 0;
+  --x: 2;
+  --y: 3;
   --background-lightness: 20%;
   --text-lightness: 80%;
   background-color: hsl(200, 50%, var(--background-lightness));
@@ -64,4 +64,13 @@ body {
   top: calc(var(--y) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
   left: calc(var(--x) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
   font-weight: bold;
+  transition: 100ms ease-in-out;
+  animation: appear 200ms ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0.5;
+    transform: scale(0);
+  }
 }
