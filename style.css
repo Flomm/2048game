@@ -50,8 +50,8 @@ body {
 }
 
 .tile {
-  --x: 2;
-  --y: 2;
+  --x: 0;
+  --y: 0;
   --background-lightness: 20%;
   --text-lightness: 80%;
   background-color: hsl(200, 50%, var(--background-lightness));
@@ -62,6 +62,6 @@ body {
   width: var(--tile-size);
   color: var(--bg-color);
   top: calc(var(--y) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
-  left: calc(var(--y) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
+  left: calc(var(--x) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
   font-weight: bold;
 }
