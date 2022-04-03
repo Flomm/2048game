@@ -7,26 +7,26 @@ export const qsa = (selector, parent = document) => {
 };
 
 export const createElem = (type, opts = {}) => {
-  const element = document.createElement(type);
+  const elem = document.createElement(type);
   Object.entries(opts).forEach(([key, value]) => {
     if (key === 'class') {
-      element.classList.add(value);
+      elem.classList.add(value);
       return;
     }
 
     if (key === 'dataset') {
       Object.entries(value).forEach(([dataKey, dataValue]) => {
-        element.dataset[dataKey] = dataValue;
+        elem.dataset[dataKey] = dataValue;
       });
       return;
     }
 
     if (key === 'text') {
-      element.textContent = value;
+      elem.textContent = value;
       return;
     }
 
-    element.setAttribute(key, value);
+    elem.setAttribute(key, value);
   });
-  return element;
+  return elem;
 };
