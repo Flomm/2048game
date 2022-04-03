@@ -2,11 +2,7 @@
   --bg-color: rgb(214, 214, 214);
   --board-color: rgb(112, 112, 112);
   --tile-color: rgb(22, 15, 15);
-
-  --tile-size: 20vmin;
-  --tile-qty: 4;
   --radius-size: 1vmin;
-  --gap-size: 2vmin;
 }
 
 *,
