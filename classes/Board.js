@@ -20,7 +20,7 @@ export default class Board {
         );
       },
     );
-    console.warn(this.#placeHolderList);
+    console.warn(this.#getRandomPlaceholder());
   }
 
   #setBoardProps() {
@@ -35,10 +35,17 @@ export default class Board {
       const newPlaceholder = createElem('div', {
         class: 'placeholder',
       });
-      newPlaceholder.classList.add('flex-center');
       placeHolderList.push(placeHolderList);
       this.boardElem.append(newPlaceholder);
     }
     return placeHolderList;
+  }
+
+  #getRandomPlaceholder() {
+    const emptyPlaceholders = this.#placeHolderList.filter(
+      placeholder => !placeholder.tile,
+    );
+    const randomNumber = Math.floor(Math.random() * emptyPlaceholders.length);
+    return emptyPlaceholders[randomNumber];
   }
 }

@@ -23,12 +23,6 @@ body {
   font-size: 7.5vmin;
 }
 
-.flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 #game-board {
   background-color: var(--board-color);
   display: grid;
@@ -62,6 +56,14 @@ body {
   font-weight: bold;
   transition: 100ms ease-in-out;
   animation: appear 200ms ease-in-out;
+}
+
+body,
+.tile,
+.placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes appear {
