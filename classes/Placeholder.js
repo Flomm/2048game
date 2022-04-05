@@ -13,4 +13,12 @@ export default class Placeholder {
   get tile() {
     return this.#tile;
   }
+
+  set tile(newTile) {
+    this.#tile = newTile;
+    if (newTile) {
+      this.#tile.x = this.#x;
+      this.#tile.y = this.#y;
+    }
+  }
 }

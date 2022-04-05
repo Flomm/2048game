@@ -40,8 +40,6 @@ body {
 }
 
 .tile {
-  --x: 2;
-  --y: 3;
   --background-lightness: 20%;
   --text-lightness: 80%;
   background-color: hsl(200, 50%, var(--background-lightness));
