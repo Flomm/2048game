@@ -20,7 +20,6 @@ export default class Board {
         );
       },
     );
-    console.warn(this.#getRandomPlaceholder());
   }
 
   #setBoardProps() {
@@ -41,7 +40,7 @@ export default class Board {
     return placeHolderList;
   }
 
-  #getRandomPlaceholder() {
+  getRandomPlaceholder() {
     const emptyPlaceholders = this.#placeHolderList.filter(
       placeholder => !placeholder.tile,
     );
