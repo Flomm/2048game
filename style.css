@@ -40,15 +40,12 @@ body {
 }
 
 .tile {
-  --background-lightness: 20%;
-  --text-lightness: 80%;
   background-color: hsl(200, 50%, var(--background-lightness));
   color: hsl(200, 25%, var(--text-lightness));
   position: absolute;
   border-radius: var(--radius-size);
   height: var(--tile-size);
   width: var(--tile-size);
-  color: var(--bg-color);
   top: calc(var(--y) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
   left: calc(var(--x) * (var(--tile-size) + var(--gap-size)) + var(--gap-size));
   font-weight: bold;
