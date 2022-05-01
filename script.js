@@ -13,56 +13,62 @@ gameBoard.getRandomPlaceholder().tile = new Tile(boardElem);
 // };
 
 const moveUp = () => {
-  slideTiles(gameBoard.getPlaceholdersByColumns());
+  return slideTiles(gameBoard.getPlaceholdersByColumns());
 };
 const moveDown = () => {
-  slideTiles(
+  return slideTiles(
     gameBoard.getPlaceholdersByColumns().map(col => [...col].reverse()),
   );
 };
 const moveLeft = () => {
-  slideTiles(gameBoard.getPlaceholdersByRow());
+  return slideTiles(gameBoard.getPlaceholdersByRow());
 };
 const moveRight = () => {
-  slideTiles(gameBoard.getPlaceholdersByRow().map(col => [...col].reverse()));
+  return slideTiles(
+    gameBoard.getPlaceholdersByRow().map(col => [...col].reverse()),
+  );
 };
 
 const slideTiles = placeHolders => {
-  placeHolders.forEach(holderGroup => {
-    for (let i = 1; i < holderGroup.length; i++) {
-      const holder = holderGroup[i];
-      if (!holder.tile) continue;
-      let lastValidHolder;
-      for (let j = i - 1; j >= 0; j--) {
-        const moveToHolder = holderGroup[j];
-        if (!moveToHolder.canAccept(holder.tile)) break;
-        lastValidHolder = moveToHolder;
-      }
-      if (lastValidHolder) {
-        if (lastValidHolder.tile) {
-          lastValidHolder.mergeTile = holder.tile;
-        } else {
-          lastValidHolder.tile = holder.tile;
+  return Promise.all(
+    placeHolders.flatMap(holderGroup => {
+      const promises = [];
+      for (let i = 1; i < holderGroup.length; i++) {
+        const holder = holderGroup[i];
+        if (!holder.tile) continue;
+        let lastValidHolder;
+        for (let j = i - 1; j >= 0; j--) {
+          const moveToHolder = holderGroup[j];
+          if (!moveToHolder.canAccept(holder.tile)) break;
+          lastValidHolder = moveToHolder;
         }
-        holder.tile = null;
+        if (lastValidHolder) {
+          promises.push(holder.tile.waitTransition());
+          if (lastValidHolder.tile) {
+            lastValidHolder.mergeTile = holder.tile;
+          } else {
+            lastValidHolder.tile = holder.tile;
+          }
+          holder.tile = null;
+        }
       }
-    }
-  });
+    }),
+  );
 };
 
-const handleInput = e => {
+const handleInput = async e => {
   switch (e.key) {
     case 'ArrowUp':
-      moveUp();
+      await moveUp();
       break;
     case 'ArrowDown':
-      moveDown();
+      await moveDown();
       break;
     case 'ArrowRight':
-      moveRight();
+      await moveRight();
       break;
     case 'ArrowLeft':
-      moveLeft();
+      await moveLeft();
       break;
     default:
       window.addEventListener('keydown', handleInput, { once: true });
@@ -70,6 +76,8 @@ const handleInput = e => {
       break;
   }
   gameBoard.placeHolderList.forEach(pH => pH.mergeTiles());
+  const newTile = new Tile(boardElem);
+  gameBoard.getRandomPlaceholder().tile = newTile;
   window.addEventListener('keydown', handleInput, { once: true });
   //   setupInput();
 };
