@@ -12,6 +12,10 @@ export default class Tile {
     this.value = value;
   }
 
+  get value() {
+    return this.#value;
+  }
+
   set value(value) {
     this.#value = value;
     this.#tileElem.textContent = value;
@@ -34,5 +38,9 @@ export default class Tile {
   set y(value) {
     this.#y = value;
     this.#tileElem.style.setProperty('--y', value);
+  }
+
+  remove() {
+    this.#tileElem.remove();
   }
 }

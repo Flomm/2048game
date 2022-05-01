@@ -22,6 +22,10 @@ export default class Board {
     );
   }
 
+  get placeHolderList() {
+    return this.#placeHolderList;
+  }
+
   #setBoardProps() {
     this.boardElem.style.setProperty('--tile-qty', this.#tileQty);
     this.boardElem.style.setProperty('--tile-size', `${this.#tileSize}vmin`);
@@ -38,6 +42,22 @@ export default class Board {
       this.boardElem.append(newPlaceholder);
     }
     return placeHolderList;
+  }
+
+  getPlaceholdersByColumns() {
+    return this.#placeHolderList.reduce((pHList, pH) => {
+      pHList[pH.x] = pHList[pH.x] || [];
+      pHList[pH.x][pH.y] = pH;
+      return pHList;
+    }, []);
+  }
+
+  getPlaceholdersByRow() {
+    return this.#placeHolderList.reduce((pHList, pH) => {
+      pHList[pH.y] = pHList[pH.y] || [];
+      pHList[pH.y][pH.x] = pH;
+      return pHList;
+    }, []);
   }
 
   getRandomPlaceholder() {
