@@ -10,6 +10,22 @@ export default class Placeholder {
     this.#y = y;
   }
 
+  get x() {
+    return this.#x;
+  }
+
+  set x(newX) {
+    this.#x = newX;
+  }
+
+  get y() {
+    return this.#y;
+  }
+
+  set y(newY) {
+    this.#y = newY;
+  }
+
   get tile() {
     return this.#tile;
   }
