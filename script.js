@@ -4,6 +4,8 @@ import Tile from './classes/Tile.js';
 import { slideTiles } from './functions/slideTiles.js';
 import { canMove } from './functions/canMove.js';
 
+const winningNumber = 2048;
+
 //Functions for movement
 const canMoveUp = () => {
   return canMove(gameBoard.getPlaceholdersByColumns());
@@ -75,12 +77,20 @@ const handleInput = async e => {
       return;
   }
   gameBoard.placeHolderList.forEach(pH => pH.mergeTiles());
-  gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+
+  const newTile = new Tile(boardElem);
+  gameBoard.getRandomEmptyPlaceholder().tile = newTile;
+
+  if (gameBoard.placeHolderList.some(pH => pH.tile?.value >= winningNumber)) {
+    newTile.waitTransition(true).then(() => alert('You won!'));
+    return;
+  }
 
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     newTile.waitTransition(true).then(() => alert('You lose!'));
     return;
   }
+
   setupInput();
 };
 
