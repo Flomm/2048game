@@ -73,7 +73,7 @@ const handleInput = async e => {
     default:
       window.addEventListener('keydown', handleInput, { once: true });
       //   setupInput();
-      break;
+      return;
   }
   gameBoard.placeHolderList.forEach(pH => pH.mergeTiles());
   const newTile = new Tile(boardElem);
