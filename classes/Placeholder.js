@@ -1,12 +1,10 @@
 export default class Placeholder {
-  #placeHolderElem;
   #x;
   #y;
   #tile;
   #mergeTile;
 
-  constructor(placeHolderElem, x, y) {
-    this.#placeHolderElem = placeHolderElem;
+  constructor(x, y) {
     this.#x = x;
     this.#y = y;
   }

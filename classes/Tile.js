@@ -30,6 +30,14 @@ export default class Tile {
     );
   }
 
+  get x() {
+    return this.#x;
+  }
+
+  get y() {
+    return this.#y;
+  }
+
   set x(value) {
     this.#x = value;
     this.#tileElem.style.setProperty('--x', value);

@@ -11,15 +11,12 @@ export default class Board {
   constructor(boardElem) {
     this.boardElem = boardElem;
     this.#setBoardProps();
-    this.#placeHolderList = this.#createPlaceholders().map(
-      (placeholder, index) => {
-        return new Placeholder(
-          placeholder,
-          index % this.#tileQty,
-          Math.floor(index / this.#tileQty),
-        );
-      },
-    );
+    this.#placeHolderList = this.#createPlaceholders().map((_, index) => {
+      return new Placeholder(
+        index % this.#tileQty,
+        Math.floor(index / this.#tileQty),
+      );
+    });
   }
 
   get placeHolderList() {
