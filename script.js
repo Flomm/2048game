@@ -85,28 +85,28 @@ const canMove = placeHolders => {
 
 const handleInput = async e => {
   switch (e.key) {
-    case 'ArrowUp':
+    case 'w':
       if (!canMoveUp()) {
         window.addEventListener('keydown', handleInput, { once: true });
         return;
       }
       await moveUp();
       break;
-    case 'ArrowDown':
+    case 's':
       if (!canMoveDown()) {
         window.addEventListener('keydown', handleInput, { once: true });
         return;
       }
       await moveDown();
       break;
-    case 'ArrowRight':
+    case 'd':
       if (!canMoveRight()) {
         window.addEventListener('keydown', handleInput, { once: true });
         return;
       }
       await moveRight();
       break;
-    case 'ArrowLeft':
+    case 'a':
       if (!canMoveLeft()) {
         window.addEventListener('keydown', handleInput, { once: true });
         return;
