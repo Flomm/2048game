@@ -60,7 +60,7 @@ export default class Board {
     }, []);
   }
 
-  getRandomPlaceholder() {
+  getRandomEmptyPlaceholder() {
     const emptyPlaceholders = this.#placeHolderList.filter(
       placeholder => !placeholder.tile,
     );
