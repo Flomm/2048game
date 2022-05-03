@@ -23,6 +23,11 @@ body {
   font-size: 7.5vmin;
 }
 
+main {
+  height: 100%;
+  width: 100%;
+}
+
 #game-board {
   background-color: var(--board-color);
   display: grid;
@@ -53,12 +58,64 @@ body {
   animation: appear 200ms ease-in-out;
 }
 
+.disabled {
+  filter: brightness(50%);
+  pointer-events: none;
+}
+
 body,
+main,
 .tile,
-.placeholder {
+.placeholder,
+.pop-up,
+.pop-up > div {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pop-up {
+  z-index: 1;
+  padding: 5%;
+  border: 2px solid var(--tile-color);
+  border-radius: 5px;
+  background-color: var(--bg-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: space-around;
+  animation: expand 0.3s ease-in-out;
+  font-size: 3vmin;
+  width: 40%;
+  height: 40%;
+}
+
+.pop-up > div {
+  width: 50%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: var(--board-color);
+  color: var(--bg-color);
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  padding: 5%;
+  border-radius: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+  filter: brightness(120%);
+}
+
+button:active {
+  filter: brightness(80%);
 }
 
 @keyframes appear {

@@ -3,8 +3,9 @@ import { qs } from './functions/utils.js';
 import Tile from './classes/Tile.js';
 import { slideTiles } from './functions/slideTiles.js';
 import { canMove } from './functions/canMove.js';
+import PopUp from './classes/PopUp.js';
 
-const winningNumber = 2048;
+const winningNumber = 8;
 
 //Functions for movement
 const canMoveUp = () => {
@@ -82,12 +83,16 @@ const handleInput = async e => {
   gameBoard.getRandomEmptyPlaceholder().tile = newTile;
 
   if (gameBoard.placeHolderList.some(pH => pH.tile?.value >= winningNumber)) {
-    newTile.waitTransition(true).then(() => alert('You won!'));
+    newTile.waitTransition(true).then(() => {
+      const newPopUp = new PopUp('You won!', 't');
+    });
     return;
   }
 
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
-    newTile.waitTransition(true).then(() => alert('You lose!'));
+    newTile.waitTransition(true).then(() => {
+      const newPopUp = new PopUp('You lose!', 't');
+    });
     return;
   }
 

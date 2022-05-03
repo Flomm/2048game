@@ -30,3 +30,9 @@ export const createElem = (type, opts = {}) => {
   });
   return elem;
 };
+
+export function appendChildren(parent, children) {
+  children.forEach(child => {
+    parent.appendChild(child);
+  });
+}
