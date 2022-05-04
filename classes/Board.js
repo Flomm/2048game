@@ -41,6 +41,13 @@ export default class Board {
     return placeHolderList;
   }
 
+  clearBoard() {
+    this.#placeHolderList.forEach(pH => {
+      pH.tile?.remove();
+      pH.tile = null;
+    });
+  }
+
   getPlaceholdersByColumns() {
     return this.#placeHolderList.reduce((pHList, pH) => {
       pHList[pH.x] = pHList[pH.x] || [];

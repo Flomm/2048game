@@ -7,6 +7,14 @@ import PopUp from './classes/PopUp.js';
 
 const winningNumber = 8;
 
+//Start game
+
+const boardElem = qs('#game-board');
+const gameBoard = new Board(boardElem);
+
+gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+
 //Functions for movement
 const canMoveUp = () => {
   return canMove(gameBoard.getPlaceholdersByColumns());
@@ -84,14 +92,21 @@ const handleInput = async e => {
 
   if (gameBoard.placeHolderList.some(pH => pH.tile?.value >= winningNumber)) {
     newTile.waitTransition(true).then(() => {
-      const newPopUp = new PopUp('You won!', 't');
+      const newPopUp = new PopUp('You won!');
+      newPopUp.waitForClick().then(() => {
+        gameBoard.clearBoard();
+        gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+        gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+        newPopUp.removeWindow();
+        setupInput();
+      });
     });
     return;
   }
 
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     newTile.waitTransition(true).then(() => {
-      const newPopUp = new PopUp('You lose!', 't');
+      const newPopUp = new PopUp('You lose!');
     });
     return;
   }
@@ -102,13 +117,5 @@ const handleInput = async e => {
 function setupInput() {
   window.addEventListener('keydown', handleInput, { once: true });
 }
-
-//Start game
-
-const boardElem = qs('#game-board');
-const gameBoard = new Board(boardElem);
-
-gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
-gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
 
 setupInput();
