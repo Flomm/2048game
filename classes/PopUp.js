@@ -2,12 +2,11 @@ import { createElem, qs, appendChildren } from '../functions/utils.js';
 
 export default class PopUp {
   #message;
-  #type;
   #window;
+  #restartButton;
 
-  constructor(message, type) {
+  constructor(message) {
     this.#message = message;
-    this.type = type;
     this.buildWindow();
     this.showWindow();
   }
@@ -17,6 +16,12 @@ export default class PopUp {
     qs('body').appendChild(this.#window);
   }
 
+  waitForClick() {
+    return new Promise(resolve => {
+      this.#restartButton.addEventListener('click', resolve, { once: true });
+    });
+  }
+
   buildWindow() {
     this.#window = createElem('div');
     this.#window.classList.add('pop-up');
@@ -24,14 +29,14 @@ export default class PopUp {
     messageBox.classList.add('centered');
     messageBox.textContent = this.#message;
     const buttonHolder = createElem('div');
-    const restartButton = createElem('button');
-    restartButton.textContent = 'Restart';
-    restartButton.addEventListener('click', this.removeWindow);
-    appendChildren(buttonHolder, [restartButton]);
+    this.#restartButton = createElem('button');
+    this.#restartButton.textContent = 'Restart';
+    appendChildren(buttonHolder, [this.#restartButton]);
     appendChildren(this.#window, [messageBox, buttonHolder]);
   }
 
   removeWindow() {
-    console.warn('REMOVE');
+    qs('.wrapper').classList.remove('disabled');
+    qs('body').removeChild(this.#window);
   }
 }
