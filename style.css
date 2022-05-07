@@ -94,6 +94,7 @@ main,
 
 .pop-up > div {
   width: 50%;
+  font-weight: bolder;
 }
 
 button {
@@ -116,6 +117,14 @@ button:hover {
 
 button:active {
   filter: brightness(80%);
+}
+
+.winner {
+  color: rgb(9, 126, 9);
+}
+
+.loser {
+  color: crimson;
 }
 
 @keyframes appear {

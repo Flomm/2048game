@@ -5,7 +5,7 @@ import { slideTiles } from './functions/slideTiles.js';
 import { canMove } from './functions/canMove.js';
 import PopUp from './classes/PopUp.js';
 
-const winningNumber = 8;
+const winningNumber = 2048;
 
 //Start game
 
@@ -92,7 +92,7 @@ const handleInput = async e => {
 
   if (gameBoard.placeHolderList.some(pH => pH.tile?.value >= winningNumber)) {
     newTile.waitTransition(true).then(() => {
-      const newPopUp = new PopUp('You won!');
+      const newPopUp = new PopUp('You won!', 'winner');
       newPopUp.waitForClick().then(() => {
         gameBoard.clearBoard();
         gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
@@ -106,7 +106,14 @@ const handleInput = async e => {
 
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     newTile.waitTransition(true).then(() => {
-      const newPopUp = new PopUp('You lose!');
+      const newPopUp = new PopUp('You lose!', 'loser');
+      newPopUp.waitForClick().then(() => {
+        gameBoard.clearBoard();
+        gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+        gameBoard.getRandomEmptyPlaceholder().tile = new Tile(boardElem);
+        newPopUp.removeWindow();
+        setupInput();
+      });
     });
     return;
   }
