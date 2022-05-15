@@ -1,0 +1,26 @@
+{
+  "name": "2048game",
+  "version": "1.0.0",
+  "description": "A simple game, using vanilla JS.",
+  "main": "bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flomm/2048game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Flomm/2048game/issues"
+  },
+  "homepage": "https://github.com/Flomm/2048game#readme",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1",
+    "rollup": "^2.73.0",
+    "save-dev": "^0.0.1-security"
+  }
+}
